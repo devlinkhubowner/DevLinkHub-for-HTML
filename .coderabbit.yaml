@@ -1,0 +1,13 @@
+language: "ja-JP"
+review:
+  level: strict
+focus:
+  - bug
+  - security
+  - performance
+language:
+  - python
+  - javascript
+  - html
+  - css
+  - json

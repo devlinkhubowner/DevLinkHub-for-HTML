@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja"> <!--日本語のページだと宣言-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!--スマホ用の対応-->
+        <link rel="stylesheet" type="text/css" href="{{url_for("static" ,path="/CSS/serverlist.css")}}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="icon" href="icon.png">
+        <script>
+            function makeserver(){
+                var socket = new WebSocket("wss:devlinkhub.net/ws");//websocketに接続
+                    socket.onopen = function(event) {
+                        servername = document.getElementById("servername").value;
+                        kinds = $('input[name="kinds"]:checked').val();
+                        serverdata = {"data":"makeserver","servername":servername,"kinds":kinds};
+                        serverdata = JSON.stringify(serverdata);
+                        socket.send(serverdata);
+                    }
+                    socket.onmessage = function(event){
+                        response = JSON.parse(event.data);
+                        console.log(response)
+                        if (response["response"] == true){
+                            console.log("true")
+                            location.href = "/server/?name=" + response["data"]
+                        }else{
+                            alert("もう使用されているserver名です")
+                        }
+                    }
+                }
+        </script>
+        <title>DevLinkHub</title>
+    </head>
+    <body>
+        <div class="header"> <!--最初の印象-->
+            <h1>DevLinkHub</h1>
+            <h2 id="username">welcome {{username}}</h2>
+            <input id="joinservername" type="text" name="サーバー名を入力してください">
+            <button onclick="joinserver()">参加</button>
+        </div>
+        <div class="main">
+            <p id="servers" style="display:none">{{servers}}</p>
+            <div id="server"></div>
+            <dialog id="servermakedialog">
+            <form method="dialog" id="servermakedialog">
+                <p>GitHubリポジトリの名前を入力してください</p>
+                <input type="text" name="name" id="servername">
+                <p>種類を選んでください</p>
+                <form id="publicorprivate">
+                <input type="radio" name="kinds" id="kinds" value="public" checked>public
+                <input type="radio" name="kinds" id="kinds" value="private">private
+                <button onclick="makeserver()">作成</button>
+            </form>
+            </dialog>
+            <button onclick="document.querySelector('#servermakedialog').showModal()">+</button>
+        </div>
+        <div class="footer"><!--コピーライトやロゴを入れる-->
+            &copy; 2025 @codseowner
+        </div>
+        </body>
+        <script>
+            function joinserver(){
+                var socket = new WebSocket("wss:devlinkhub.net/ws");//websocketに接続
+                socket.onopen = function(event) {
+                    joinservername = document.getElementById("joinservername").value
+                    message = JSON.stringify({"data":"joinserver","server":joinservername})
+                    socket.send(message)
+                }
+                socket.onmessage = function(event) {
+                    console.log(joinservername)
+                    location.href = "/server/?name=" + joinservername
+                }
+            }
+        </script>
+        <script>
+            //afterでscriptを実行
+            const target = document.getElementById("servers");
+            const script = document.createElement("script");
+            const uuid = self.crypto.randomUUID();
+            script.src = "{{ url_for('static', path='js/serverlist.js')}}?v="+uuid;
+            script.type = "text/javascript";
+            target.insertAdjacentElement("afterend",script)
+        </script>
+        </html>

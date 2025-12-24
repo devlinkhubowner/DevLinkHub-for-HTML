@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='/CSS/server.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>DevLinkHub</title>
+</head>
+<body>
+<div class="main">
+    <div id="channel" class="channellist">
+        <img id="image" style="height:200px; width:auto;" src="{{image}}">
+        <input id="channelname" type="text" name="channel名を入力してください">
+        <button onclick="addchannel()">+</button>
+    </div>
+
+    <div class="header">
+        <p id="server" style="display:inline-block; width:50%;">{{server}}</p>
+        <p id="now_channel" style="display:inline-block; width:50%; text-align:right;"></p>
+    </div>
+
+    <div class="chat">
+        <button id="button" onclick="oldmessage()">古いメッセージ表示</button>
+        <div id="glasschat" class="chat-messages">
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="message" style="width: 100%; height: 20px;" />
+        </div>
+    </div>
+
+    <p id="channels" style="display:none">{{channels}}</p>
+</div>
+
+<div class="footer">
+    &copy; 2025 @codseowner
+</div>
+<script>
+    function addchannel(){
+        const socket = new WebSocket("wss:devlinkhub.net/ws");
+
+        socket.onopen = (event) => {
+            channelname= document.getElementById("channelname").value;
+            console.log(channelname)
+            server = document.getElementById("server").textContent;
+            console.log(server)
+            add = {"data":"addchannel","channel":channelname,"server":server};
+            add = JSON.stringify(add);
+            socket.send(add);
+        }
+        socket.onmessage = (event) => {
+            $("#channel").append(`
+                <button onclick="load_channel('${channelname}')"class="btn-style4 size-medium width-auto radius-medium">${channelname}</button>
+            `);
+        }
+    }
+</script>
+</body>
+<script>
+    function oldmessage(){
+        console.log("oldmessage")
+        const servername = document.getElementById("server").textContent;
+        const channelname = document.getElementById("now_channel").textContent;
+        const payload = {
+            data: "oldmessage",
+            server: servername,
+            channel: channelname,
+        };
+        socket.send(JSON.stringify(payload));
+    }
+    const target = document.getElementById("channels");
+    const script = document.createElement("script");
+    script.src = "{{ url_for('static', path='js/server.js')}}?v=" + crypto.randomUUID();
+    script.type = "text/javascript";
+    target.insertAdjacentElement("afterend", script);
+</script>
+</html>

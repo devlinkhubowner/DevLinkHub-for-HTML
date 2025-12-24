@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja"> <!--日本語のページだと宣言-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!--スマホ用の対応-->
+        <link rel="stylesheet" type="text/css" href="{{url_for("static" ,path="/CSS/index.css")}}">
+        <link rel="icon" href="icon.png">
+        <title>DevLinkHub</title>
+    </head>
+    <body>
+        <div class="header"> <!--最初の印象-->
+            <h1>DevLinkHub</h1>
+            <p>
+                開発も会話も、ここひとつで。
+            </p>
+            <button class="btn-style1 size-medium width-auto radius-medium" onclick="location.href='oauth2/login'">今すぐチャットを始める</button>
+        </div>
+        <div class="main"> <!--mainの部分-->
+            <div class="contents">
+                <h2>DevLinkHubとは?</h2>
+                <p>
+                    DevLinkHubは、開発者がつながり、学び、協力できるオールインワンプラットフォームです。チャットでの相談や雑談はもちろん、プロジェクト管理やタスク進行もサポート。GitHubのようにコードのやり取りを追跡したり、個人やチームの進捗を可視化することで、開発作業を効率的に進められます。DevLinkHubは、情報・コミュニティ・プロジェクト管理をひとつにまとめた、開発者のためのハブです。
+                </p>
+            </div>
+            <br>
+            <div class="contents">
+                <h2>DevLinkHubの目標</h2>
+                <p>
+                    DevLinkHubは、普段の開発で Chat を使う中で「チャンネルを自由に作れない不便さ」を感じたことから生まれました。
+                    GitHub の Wiki や Issue ではできない、軽いやり取りと情報の記録をひとつにまとめられるチャットツールを目指しています。
+                    このツールを通じて、よりスムーズで快適な開発ライフを実現できることを願っています。
+                </p>
+            </div>
+            <br>
+            <div class="contents">
+                <h2>DevLinkHubの作成者</h2>
+                <p>
+                    @codseowner
+                </p>
+            </div>
+        </div>
+        <div class="footer"><!--コピーライトやロゴを入れる-->
+            &copy; 2025 @codseowner
+        </div>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+body {
+    background-color: #272f69;
+}
+
+.header{
+    background: #5a4bfa; /*グラデーションを作れる*/
+    color: white;
+    text-align: center;
+    padding: 100px 5px;
+    /* margin: 0; */
+}
+.header a{
+    border: solid 1px white;
+    border-radius: 10px;
+}
+.main {
+    background: #506fc7;
+    color: white;
+}
+
+
+.main h2{
+    text-align: center;
+}
+
+.main p{
+    text-align: center;
+}
+
+.contents {
+    padding: 10px;
+    margin: 0 auto;
+    background: #272f69;
+    border-radius: 20px;
+}
+
+.center{
+    text-align: center;
+}
+
+
+.footer{
+    background: #001140;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+}
+
+.but button{
+    border-radius: 10px;
+    border: solid 1px #07b519;
+    background-color: #07b519;
+    color: white;
+    filter: drop-shadow(0px 0px 20px white);
+}
+
+.but button:hover{
+    border-radius: 10px;
+    border: solid 1px #07b519;
+    background-color: #07b519;
+    filter: drop-shadow(0px 0px 60px white);
+}
+
+.btn-style4 { display: inline-block; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; border: none; background: linear-gradient(to right, #3b82f6, #8b5cf6); color: white; transition: box-shadow 0.3s; }
+.btn-style4:hover { box-shadow: 0 4px 12px color-mix(in srgb, #3b82f6 40%, transparent); }
+
+.size-small { font-size: 0.875rem; padding: 0.5em 1em; }
+.size-medium { font-size: 1rem; padding: 0.75em 1.5em; }
+.size-large { font-size: 1.125rem; padding: 1em 2em; }
+
+.width-auto { display: inline-block; width: auto; }
+.width-full { display: block; width: 100%; box-sizing: border-box; }
+
+.radius-none { border-radius: 0; }
+.radius-small { border-radius: 4px; }
+.radius-medium { border-radius: 8px; }
+.radius-large { border-radius: 50px; }
