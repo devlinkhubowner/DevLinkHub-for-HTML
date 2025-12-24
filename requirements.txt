@@ -1,0 +1,10 @@
+httpx
+python-dotenv
+supabase
+PyGithub
+fastapi
+uvicorn
+jinja2
+cryptography
+PyJWT
+itsdangerous
